@@ -1,4 +1,5 @@
-import { BookingForm } from "./components/BookingFormX";
+
+import { BookingForm } from "./components/BookingForm";
 import { handleGetBookings } from "./services/formHandlers";
 
 export default async function Home() {
