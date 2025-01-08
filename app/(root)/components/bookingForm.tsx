@@ -157,7 +157,7 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
                         <Button
                             type="button"
                             variant='outline'
-                            className={`text-black rounded-lg bg-gray-100 hover:bg-gray-200 focus:bg-slate-900 focus:text-white dark:text-white ${selectedTime === time && 'bg-slate-900 dark:focus:bg-transparent text-white dark:border-2 dark:!border-slate-400'}`}
+                            className={`text-black rounded-lg bg-gray-100 hover:bg-gray-200 focus:bg-blue-600 focus:text-white dark:text-white ${selectedTime === time && 'bg-blue-600 dark:focus:bg-transparent text-white dark:border-2 dark:!border-slate-400'}`}
                             key={time}
                             onClick={() => setSelectedTime(time)}
                         >
