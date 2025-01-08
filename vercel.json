@@ -1,0 +1,14 @@
+{
+    "build": {
+      "env": {
+        "GENERATE_PRISMA_CLIENT": "true"
+      }
+    },
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ]
+  }
+  
