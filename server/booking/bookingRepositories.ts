@@ -15,6 +15,9 @@ export const getBookings = async () => {
 }
 
 export const getBookingsPerPage = async ({ filters, start, end }: BookingPerPageProps) => {
+    // We get get a range of bookings if there are filters passed in
+    // Skip the start amount like first 20, 30...
+    // We take the inbetween like 10-20, 20-30...
     return prisma.booking.findMany({
         where: filters ? {
             dateTime: {
@@ -46,7 +49,8 @@ export const postBooking = async ({ data }: { data: BookingProps }) => {
     })
 }
 export const updateBooking = async ({ data }: { data: BookingProps }) => {
-    const { name, email, guests, dateTime } = data
+    const { name, email, guests, dateTime } = data;
+    // Upsert to see if there is a existing email and updating it else create new
     return await prisma.booking.upsert({
         where: { email },
         update: {

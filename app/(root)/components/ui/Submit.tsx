@@ -7,8 +7,8 @@ interface SubmitProps {
     handleSubmit: UseFormHandleSubmit<BookingProps>;
     submitUpdate: (data: BookingProps) => void;
     onCancelUpdate: () => void;
-
 }
+
 export const Submit = ({ updateBooking, handleSubmit, submitUpdate, onCancelUpdate }: SubmitProps) => {
     return (
         <div className="md:!mt-0 flex gap-1">

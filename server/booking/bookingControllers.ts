@@ -29,7 +29,8 @@ export const getBookingsController = async (): Promise<Date[]> => {
 }
 
 export const getFilteredBookingsController = async ({ start, end, date }: FilteredBookingProps): Promise<{ bookings: BookingExtendedProps[], totalBookings: number }> => {
-    try {
+// Get the filtered bookings per page and total bookings simultaneously using Promise.all
+try {
         const filters = await filterDatesService(date);
         const [bookings, totalBookings] = await Promise.all([
             await getBookingsPerPage({
