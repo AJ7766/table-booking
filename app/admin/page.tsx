@@ -24,7 +24,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     return (
         <main className="h-full w-full grid grid-cols-1 pt-10 md:px-10 px-0">
             <div className="overflow-scroll">
-                <Table className="space-y-4 md:m-auto mx-4 my-4 overflow-auto">
+                <Table className="space-y-4 md:m-auto mx-4 my-4">
                     <TableHeader>
                         <TableRow>
                             <TableHead>Name</TableHead>
