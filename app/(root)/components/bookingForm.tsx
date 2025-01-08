@@ -18,7 +18,7 @@ const times = [
     '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00'
 ];
 
-export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
+export const BookingFormX = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [selectedTime, setSelectedTime] = useState<string | undefined>(times[0]);
     const [updateBooking, setUpdateBooking] = useState(false);
