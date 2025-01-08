@@ -8,70 +8,19 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
 import { MoreVertical } from "lucide-react"
-import { CalendarFilter, DeleteDropdownItem, ToggleDropdownItem } from "./components/bookingComponents"
-import { getBookings, getSearchParams } from "./components/bookingActions"
 import { formatDateTimeReadable } from "@/utils/dateFormatter"
-
-const PaginationControlls = async ({
-    page,
-    per_page,
-    hasPrevPage,
-    hasNextPage
-}: {
-    page: string | string[],
-    per_page: string | string[],
-    hasPrevPage: boolean,
-    hasNextPage: boolean
-}) => {
-    const prevPage = Number(page) > 1 ? Number(page) - 1 : 1;
-    const nextPage = Number(page) + 1;
-    return (
-        <Pagination>
-            <PaginationContent>
-                {hasPrevPage &&
-                    <PaginationItem>
-                        <PaginationPrevious href={`?page=${prevPage}&per_page=${per_page}`} />
-                    </PaginationItem>
-                }
-                {hasPrevPage &&
-                    <PaginationItem>
-                        <PaginationLink href={`?page=${prevPage}&per_page=${per_page}`}>{Number(page) - 1}</PaginationLink>
-                    </PaginationItem>
-                }
-                <PaginationItem>
-                    <PaginationLink className="bg-gray-100 dark:bg-transparent dark:!border dark:!border-slate-600">{page}</PaginationLink>
-                </PaginationItem>
-                {hasNextPage &&
-                    <PaginationItem>
-                        <PaginationLink href={`?page=${nextPage}&per_page=${per_page}`}>{Number(page) + 1}</PaginationLink>
-                    </PaginationItem>
-                }
-                <PaginationItem>
-                    <PaginationEllipsis />
-                </PaginationItem>
-                {hasNextPage &&
-                    <PaginationItem>
-                        <PaginationNext href={`?page=${nextPage}&per_page=${per_page}`} />
-                    </PaginationItem>
-                }
-            </PaginationContent>
-        </Pagination>
-    )
-}
+import { Pagination } from "./components/ui/Pagination"
+import { getSearchParams } from "./services/tableServices"
+import { handleGetFilteredBookings } from "./services/bookingHandlers"
+import { ToggleCancelDropdownItem } from "./components/ui/ToggleCancelDropdownItem"
+import { DeleteDropdownItem } from "./components/ui/DeleteDropdownItem"
+import { Calendar } from "./components/ui/Calendar"
 
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+    // We get searchParams if they exist, then we pass the values to get handled to get the bookings and totalBookings
     const { page, per_page, start, end, date } = await getSearchParams({ searchParams })
-    const { bookings, totalBookings } = await getBookings(start, end, date); // Slicing bookings per page 0-5, 5-10...
+    const { bookings, totalBookings } = await handleGetFilteredBookings({ start, end, date });
     return (
         <main className="h-full w-full grid grid-cols-1 pt-10 md:px-10 px-0">
             <Table className="space-y-4 md:m-auto mx-4 my-4 overflow-auto">
@@ -80,7 +29,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                         <TableHead>Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Guests</TableHead>
-                        <TableHead><CalendarFilter /></TableHead>
+                        <TableHead><Calendar /></TableHead>
                         <TableHead>Canceled</TableHead>
                         <TableHead>Edit</TableHead>
                     </TableRow>
@@ -100,8 +49,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                                         <span className="sr-only">Actions</span>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent>
-                                        <ToggleDropdownItem id={booking.id} canceled={booking.canceled}/>
-                                        <DeleteDropdownItem id={booking.id}/>
+                                        <ToggleCancelDropdownItem id={booking.id} canceled={booking.canceled} />
+                                        <DeleteDropdownItem id={booking.id} />
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             </TableCell>
@@ -116,7 +65,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 <TableFooter>
                 </TableFooter>
             </Table >
-            <PaginationControlls
+            <Pagination
                 page={page}
                 per_page={per_page}
                 hasPrevPage={start > 1}

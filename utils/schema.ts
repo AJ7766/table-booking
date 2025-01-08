@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export type BookingFormData = z.infer<typeof bookingSchema>;
+export type BookingProps = z.infer<typeof bookingSchema>;
 
 export const bookingSchema = z.object({
     name: z.string().min(1, "Name is required").max(25, "Name cannot be longer than 25 characters"),

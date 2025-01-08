@@ -7,7 +7,7 @@ export const formatSwedishDateTime = (date: Date) => {
 };
 
 export const formatDateTime = (date: Date, selectedTime: string) => {
-    // Joining Date and the selectedTime into a newDateObj
+    // Joining Date and the selectedTime into a date-obj
     const [hours, minutes] = selectedTime.split(':').map(Number);
     const shallowDate = new Date(date);
     shallowDate.setHours(hours, minutes, 0, 0);

@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
-import { isValidPassword } from "./lib/isValidPassword"
+import { isValidPassword } from "./utils/validation";
 
 export async function middleware(req: NextRequest) {
     const pathname = req.nextUrl.pathname;
-
+    // Every URL that starts with "/admin" goes through a validation
+    // If not authenitcated return a response 401 and a login-prompt
+    // Checking authorization headers for values
     if (pathname.startsWith("/admin")) {
         const isAuthenticatedResult = await isAuthenticated(req);
 
