@@ -23,48 +23,50 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const { bookings, totalBookings } = await handleGetFilteredBookings({ start, end, date });
     return (
         <main className="h-full w-full grid grid-cols-1 pt-10 md:px-10 px-0">
-            <Table className="space-y-4 md:m-auto mx-4 my-4 overflow-auto">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Guests</TableHead>
-                        <TableHead><Calendar /></TableHead>
-                        <TableHead>Canceled</TableHead>
-                        <TableHead>Edit</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {bookings.map((booking) => (
-                        <TableRow key={booking.id}>
-                            <TableCell className="whitespace-nowrap">{booking.name}</TableCell>
-                            <TableCell className="whitespace-nowrap">{booking.email}</TableCell>
-                            <TableCell className="whitespace-nowrap">{booking.guests}</TableCell>
-                            <TableCell className="whitespace-nowrap">{formatDateTimeReadable(booking.dateTime)}</TableCell>
-                            <TableCell className="whitespace-nowrap">{booking.canceled ? 'Yes' : 'No'}</TableCell>
-                            <TableCell>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <MoreVertical />
-                                        <span className="sr-only">Actions</span>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <ToggleCancelDropdownItem id={booking.id} canceled={booking.canceled} />
-                                        <DeleteDropdownItem id={booking.id} />
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                    {bookings.length < 1 &&
+            <div className="overflow-scroll">
+                <Table className="space-y-4 md:m-auto mx-4 my-4 overflow-auto">
+                    <TableHeader>
                         <TableRow>
-                            <TableCell>No bookings found</TableCell>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Guests</TableHead>
+                            <TableHead><Calendar /></TableHead>
+                            <TableHead>Canceled</TableHead>
+                            <TableHead>Edit</TableHead>
                         </TableRow>
-                    }
-                </TableBody>
-                <TableFooter>
-                </TableFooter>
-            </Table >
+                    </TableHeader>
+                    <TableBody>
+                        {bookings.map((booking) => (
+                            <TableRow key={booking.id}>
+                                <TableCell className="whitespace-nowrap">{booking.name}</TableCell>
+                                <TableCell className="whitespace-nowrap">{booking.email}</TableCell>
+                                <TableCell className="whitespace-nowrap">{booking.guests}</TableCell>
+                                <TableCell className="whitespace-nowrap">{formatDateTimeReadable(booking.dateTime)}</TableCell>
+                                <TableCell className="whitespace-nowrap">{booking.canceled ? 'Yes' : 'No'}</TableCell>
+                                <TableCell>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger>
+                                            <MoreVertical />
+                                            <span className="sr-only">Actions</span>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent>
+                                            <ToggleCancelDropdownItem id={booking.id} canceled={booking.canceled} />
+                                            <DeleteDropdownItem id={booking.id} />
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                        {bookings.length < 1 &&
+                            <TableRow>
+                                <TableCell>No bookings found</TableCell>
+                            </TableRow>
+                        }
+                    </TableBody>
+                    <TableFooter>
+                    </TableFooter>
+                </Table >
+            </div>
             <Pagination
                 page={page}
                 per_page={per_page}
