@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { MoreVertical } from "lucide-react"
-import { formatDateTimeReadable } from "@/utils/dateFormatter"
+import { formatDateTimeReadable, formatSwedishDateTime } from "@/utils/dateFormatter"
 import { Pagination } from "./components/ui/Pagination"
 import { getSearchParams } from "./services/tableServices"
 import { handleGetFilteredBookings } from "./services/bookingHandlers"
@@ -44,7 +44,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                                     <TableCell className="whitespace-nowrap">{booking.name}</TableCell>
                                     <TableCell className="whitespace-nowrap">{booking.email}</TableCell>
                                     <TableCell className="whitespace-nowrap">{booking.guests}</TableCell>
-                                    <TableCell className="whitespace-nowrap">{formatDateTimeReadable(booking.dateTime)}</TableCell>
+                                    <TableCell className="whitespace-nowrap">{formatSwedishDateTime(booking.dateTime)}</TableCell>
                                     <TableCell className="whitespace-nowrap">{booking.canceled ? 'Yes' : 'No'}</TableCell>
                                     <TableCell>
                                         <DropdownMenu>
