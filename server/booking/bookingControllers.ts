@@ -39,7 +39,7 @@ try {
                 end,
             }), await getBookingsCount()
         ]);
-
+        console.log("Bookings from filtered:", bookings)
         return { bookings: bookings, totalBookings }
     } catch (error) {
         console.error("Unknown error fetching filtered bookings", error instanceof Error && error.stack);

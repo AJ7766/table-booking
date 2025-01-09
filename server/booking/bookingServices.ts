@@ -20,5 +20,6 @@ export const filterDatesService = async (date?: string | string[]) => {
             lt: endOfDay,
         };
     }
+    console.log("Filters:", filters)
     return filters;
 }
