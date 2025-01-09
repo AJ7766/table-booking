@@ -29,8 +29,8 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     });
 
     useEffect(() => {
-        console.log("Selected time:", selectedTime, "Date:", date)
         if (date && selectedTime) {
+            console.log("Value Date:", formatDateTime(date, selectedTime))
             setValue("dateTime", formatDateTime(date, selectedTime));
         }
     }, [date, selectedTime, setValue]);
