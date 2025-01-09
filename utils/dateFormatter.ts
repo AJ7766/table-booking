@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 export const formatSwedishDateTime = (date: Date) => {
     // Altering date to Swedish timezone
     const swedishDateTime = DateTime.fromJSDate(date).setZone('Europe/Stockholm');
+    console.log("Swedish", swedishDateTime.toJSDate(), "Normal", date)
     return swedishDateTime.toJSDate();
 };
 
@@ -11,8 +12,9 @@ export const formatDateTime = (date: Date, selectedTime: string) => {
     const [hours, minutes] = selectedTime.split(':').map(Number);
     const shallowDate = new Date(date);
     shallowDate.setHours(hours, minutes, 0, 0);
+    console.log("Shallow Date", shallowDate, "Date:", date)
 
-    return formatSwedishDateTime(shallowDate);
+    return shallowDate;
 };
 
 export const formatDateTimeReadable = (date: Date) => {

@@ -1,6 +1,6 @@
 export const filterDatesService = async (date?: string | string[]) => {
     let filters: { gte: Date; lt: Date } | undefined;
-    console.log("Date from filters", date)
+    
     if (date) {
         const selectedDate = new Date(Array.isArray(date) ? date[0] : date);
         if (isNaN(selectedDate.getTime())) {

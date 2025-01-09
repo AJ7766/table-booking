@@ -19,7 +19,7 @@ const times = [
 ];
 
 export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
-    const [date, setDate] = useState<Date | undefined>(formatSwedishDateTime(new Date()));
+    const [date, setDate] = useState<Date | undefined>(new Date());
     const [selectedTime, setSelectedTime] = useState<string | undefined>(times[0]);
     const [updateBooking, setUpdateBooking] = useState(false);
     const [message, setMessage] = useState('');
@@ -31,7 +31,7 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     useEffect(() => {
         console.log("Selected time:", selectedTime, "Date:", date)
         if (date && selectedTime) {
-            setValue("dateTime", formatDateTime(formatSwedishDateTime(date), selectedTime));
+            setValue("dateTime", formatDateTime(date, selectedTime));
         }
     }, [date, selectedTime, setValue]);
 
