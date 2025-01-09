@@ -23,7 +23,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const { bookings, totalBookings } = await handleGetFilteredBookings({ start, end, date });
     return (
         <main className="h-full w-full grid grid-cols-1 pt-10 md:px-10 px-0">
-            <div className="overflow-scroll">
+            <div className="overflow-auto">
                 <Table className="space-y-4 md:m-auto mx-4 my-4">
                     <TableHeader>
                         <TableRow>
