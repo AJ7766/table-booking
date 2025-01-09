@@ -57,15 +57,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                                 </TableCell>
                             </TableRow>
                         ))}
-                        {bookings.length < 1 &&
-                            <TableRow>
-                                <TableCell>No bookings found</TableCell>
-                            </TableRow>
-                        }
                     </TableBody>
                     <TableFooter>
                     </TableFooter>
                 </Table >
+                {bookings.length < 1 && <div className="m-5">No bookings found</div>}
             </div>
             <Pagination
                 page={page}
