@@ -1,3 +1,5 @@
+import { formatSwedishDateTime } from "@/utils/dateFormatter";
+
 export const filterDatesService = async (date?: string | string[]) => {
     let filters: { gte: Date; lt: Date } | undefined;
 
@@ -7,10 +9,10 @@ export const filterDatesService = async (date?: string | string[]) => {
             throw new Error(`Invalid date format: ${date}`);
         }
 
-        const startOfDay = new Date(selectedDate);
+        const startOfDay = formatSwedishDateTime(new Date(selectedDate));
         startOfDay.setHours(0, 0, 0, 0);
 
-        const endOfDay = new Date(selectedDate);
+        const endOfDay = formatSwedishDateTime(new Date(selectedDate));
         endOfDay.setHours(23, 59, 59, 999);
 
         filters = {
