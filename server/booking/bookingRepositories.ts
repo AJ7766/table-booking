@@ -33,8 +33,18 @@ export const getBookingsPerPage = async ({ filters, start, end }: BookingPerPage
     });
 }
 
-export const getBookingsCount = async () => {
-    return prisma.booking.count();
+export const getBookingsCount = async (filters?: {
+    gte: Date,
+    lt: Date
+}) => {
+    return prisma.booking.count({
+        where: filters ? {
+            dateTime: {
+                gte: filters.gte,
+                lt: filters.lt,
+            },
+        } : undefined,
+    });
 }
 
 export const postBooking = async ({ data }: { data: BookingProps }) => {

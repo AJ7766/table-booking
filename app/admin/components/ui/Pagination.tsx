@@ -36,7 +36,9 @@ export const Pagination = ({
                     </PaginationItem>
                 }
                 <PaginationItem>
-                    <PaginationEllipsis />
+                    {hasNextPage &&
+                        <PaginationEllipsis />
+                    }
                 </PaginationItem>
                 {hasNextPage &&
                     <PaginationItem>

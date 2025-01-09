@@ -42,7 +42,7 @@ export const getFilteredBookingsController = async ({ start, end, date }: Filter
                 filters,
                 start,
                 end,
-            }), await getBookingsCount()
+            }), await getBookingsCount(filters)
         ]);
         return { bookings: bookings, totalBookings }
     } catch (error) {

@@ -21,7 +21,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     // We get searchParams if they exist, then we pass the values to get handled to get the bookings and totalBookings
     const { page, per_page, start, end, date } = await getSearchParams({ searchParams })
     const { bookings, totalBookings } = await handleGetFilteredBookings({ start, end, date });
-
+    
     return (
         <>
             <main className="h-full w-full flex flex-col md:gap-5 gap-1 justify-center pt-10 md:px-10 px-0">

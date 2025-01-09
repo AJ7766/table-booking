@@ -7,8 +7,8 @@ import { ModeToggle } from "@/components/toggleTheme";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Booking App - Foodtel test",
-    description: "Foodtel test",
+    title: "Booking App",
+    description: "Booking App",
 };
 
 export default function RootLayout({

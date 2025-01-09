@@ -19,6 +19,8 @@ export const Calendar = () => {
             return;
         }
         const currentSearchParams = new URLSearchParams(window.location.search);
+        currentSearchParams.delete("page");
+        currentSearchParams.delete("per_page");
         currentSearchParams.set("date", date.toString());
         router.push(`?${currentSearchParams.toString()}`);
     }, [date, router])
