@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { MoreVertical } from "lucide-react"
-import { formatDateTimeReadable } from "@/utils/dateFormatter"
+import { formatDateTimeReadable, formatSwedishDateTime } from "@/utils/dateFormatter"
 import { Pagination } from "./components/ui/Pagination"
 import { getSearchParams } from "./services/tableServices"
 import { handleGetFilteredBookings } from "./services/bookingHandlers"
@@ -21,6 +21,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     // We get searchParams if they exist, then we pass the values to get handled to get the bookings and totalBookings
     const { page, per_page, start, end, date } = await getSearchParams({ searchParams })
     const { bookings, totalBookings } = await handleGetFilteredBookings({ start, end, date });
+
     return (
         <>
             <main className="h-full w-full flex flex-col md:gap-5 gap-1 justify-center pt-10 md:px-10 px-0">
@@ -43,7 +44,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                                     <TableCell className="whitespace-nowrap">{booking.name}</TableCell>
                                     <TableCell className="whitespace-nowrap">{booking.email}</TableCell>
                                     <TableCell className="whitespace-nowrap">{booking.guests}</TableCell>
-                                    <TableCell className="whitespace-nowrap">{formatDateTimeReadable(booking.dateTime)}</TableCell>
+                                    <TableCell className="whitespace-nowrap">{formatSwedishDateTime(booking.dateTime)}</TableCell>
                                     <TableCell className="whitespace-nowrap">{booking.canceled ? 'Yes' : 'No'}</TableCell>
                                     <TableCell>
                                         <DropdownMenu>

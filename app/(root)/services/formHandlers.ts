@@ -4,6 +4,7 @@ import { BookingProps } from "@/utils/schema";
 import { getBookingsController, postBookingController, updateBookingController } from "@/server/booking/bookingControllers";
 
 export const handleSubmitBooking = async (data: BookingProps) => {
+    console.log('Handlers date', data.dateTime)
     return await postBookingController(data);
 }
 

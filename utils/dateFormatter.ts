@@ -2,8 +2,7 @@ import { DateTime } from "luxon";
 
 export const formatSwedishDateTime = (date: Date) => {
     // Altering date to Swedish timezone
-    const swedishDateTime = DateTime.fromJSDate(date).setZone('Europe/Stockholm');
-    return swedishDateTime.toJSDate();
+    return DateTime.fromJSDate(date).setZone('Europe/Stockholm').toISO;;
 };
 
 export const formatDateTime = (date: Date, selectedTime: string) => {

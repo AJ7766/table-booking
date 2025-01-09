@@ -1,11 +1,9 @@
-import { formatSwedishDateTime } from "@/utils/dateFormatter";
-
 export const filteredTimes = (times: string[], bookedTimes: Date[], date?: Date) => {
     return times.filter((time) => {
-        const currentTime = formatSwedishDateTime(new Date());
+        const currentTime = new Date();
         // Compare the time in the current date with the current time
         const [hour, minute] = time.split(":");
-        const selectedTime = date ? date : formatSwedishDateTime(new Date());
+        const selectedTime = date ? date : new Date();
         selectedTime.setHours(Number(hour), Number(minute), 0, 0); // Set the time for the selected day
         // Check if the selected time is already booked
         const isBooked = bookedTimes.some((bookingDate) => {

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { handleSubmitBooking, handleUpdateBooking } from "../services/formHandlers";
 import { BookingProps, bookingSchema } from "@/utils/schema";
-import { formatDateTime, formatSwedishDateTime } from "@/utils/dateFormatter";
+import { formatDateTime } from "@/utils/dateFormatter";
 import { filteredTimes } from "../services/formServices";
 import { Input } from "./ui/Input";
 import { Calendar } from "./ui/Calendar";
@@ -52,7 +52,7 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     const submitBooking = async (data: BookingProps) => {
         // Sending a server request to process submited data
         setMessage('')
-        console.log("Submited data", data.dateTime)
+
         const { message, success } = await handleSubmitBooking(data);
         setMessage(message);
         if (message === 'You already have a booking. Would you like to update your booking?') {
@@ -85,13 +85,13 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     }
 
     const resetForm = () => {
-        setDate(formatSwedishDateTime(new Date()))
+        setDate(new Date())
         setSelectedTime(times[0])
         reset({
             name: '',
             email: '',
             guests: 1,
-            dateTime: formatSwedishDateTime(new Date())
+            dateTime: new Date()
         });
     }
     return (

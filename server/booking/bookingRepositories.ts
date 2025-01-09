@@ -44,7 +44,7 @@ export const postBooking = async ({ data }: { data: BookingProps }) => {
             name,
             email,
             guests: Number(guests),
-            dateTime: new Date(dateTime),
+            dateTime: dateTime,
         },
     })
 }

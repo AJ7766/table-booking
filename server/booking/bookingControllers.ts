@@ -5,12 +5,17 @@ import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { formValidation } from "@/utils/validation";
 import { filterDatesService } from "./bookingServices";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 interface FilteredBookingProps {
     start: number;
     end: number;
     date?: string | string[];
 }
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 interface BookingExtendedProps extends BookingProps {
     id: number;
@@ -29,8 +34,8 @@ export const getBookingsController = async (): Promise<Date[]> => {
 }
 
 export const getFilteredBookingsController = async ({ start, end, date }: FilteredBookingProps): Promise<{ bookings: BookingExtendedProps[], totalBookings: number }> => {
-// Get the filtered bookings per page and total bookings simultaneously using Promise.all
-try {
+    // Get the filtered bookings per page and total bookings simultaneously using Promise.all
+    try {
         const filters = await filterDatesService(date);
         const [bookings, totalBookings] = await Promise.all([
             await getBookingsPerPage({
