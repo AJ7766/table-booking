@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.className} flex h-auto sm:h-screen font-sans antialiased flex-col transition-all duration-1000 ease-in-out`}>
+            <body className={`${inter.className} flex h-auto sm:h-screen font-sans antialiased flex-col transition-all duration-700 ease-in-out`}>
                 <ThemeProvider>
                     <ModeToggle />
                     {children}

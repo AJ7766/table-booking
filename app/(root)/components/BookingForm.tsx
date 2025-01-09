@@ -93,7 +93,6 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
             dateTime: new Date()
         });
     }
-
     return (
         <form onSubmit={handleSubmit(submitBooking)} className="lg:w-800 md:w-4/5 w-full space-y-4 md:m-auto mx-4 my-4">
             <Input

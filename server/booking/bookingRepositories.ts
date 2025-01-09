@@ -48,6 +48,7 @@ export const postBooking = async ({ data }: { data: BookingProps }) => {
         },
     })
 }
+
 export const updateBooking = async ({ data }: { data: BookingProps }) => {
     const { name, email, guests, dateTime } = data;
     // Upsert to see if there is a existing email and updating it else create new
