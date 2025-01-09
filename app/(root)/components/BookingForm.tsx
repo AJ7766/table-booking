@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { handleSubmitBooking, handleUpdateBooking } from "../services/formHandlers";
 import { BookingProps, bookingSchema } from "@/utils/schema";
-import { formatDateTime } from "@/utils/dateFormatter";
+import { formatDateTime, formatSwedishDateTime } from "@/utils/dateFormatter";
 import { filteredTimes } from "../services/formServices";
 import { Input } from "./ui/Input";
 import { Calendar } from "./ui/Calendar";
@@ -19,7 +19,7 @@ const times = [
 ];
 
 export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
-    const [date, setDate] = useState<Date | undefined>(new Date());
+    const [date, setDate] = useState<Date | undefined>(formatSwedishDateTime(new Date()));
     const [selectedTime, setSelectedTime] = useState<string | undefined>(times[0]);
     const [updateBooking, setUpdateBooking] = useState(false);
     const [message, setMessage] = useState('');
@@ -29,8 +29,9 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     });
 
     useEffect(() => {
+        console.log("Selected time:", selectedTime, "Date:", date)
         if (date && selectedTime) {
-            setValue("dateTime", formatDateTime(date, selectedTime));
+            setValue("dateTime", formatDateTime(formatSwedishDateTime(date), selectedTime));
         }
     }, [date, selectedTime, setValue]);
 
@@ -84,13 +85,13 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     }
 
     const resetForm = () => {
-        setDate(new Date())
+        setDate(formatSwedishDateTime(new Date()))
         setSelectedTime(times[0])
         reset({
             name: '',
             email: '',
             guests: 1,
-            dateTime: new Date()
+            dateTime: formatSwedishDateTime(new Date())
         });
     }
     return (

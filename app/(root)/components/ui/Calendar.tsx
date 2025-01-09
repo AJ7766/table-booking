@@ -1,4 +1,5 @@
 import { Calendar as CalendarForm } from "@/components/ui/calendar";
+import { formatSwedishDateTime } from "@/utils/dateFormatter";
 
 interface CalendarProps {
     date?: Date;
@@ -11,15 +12,15 @@ export const Calendar = ({ date, handleDate }: CalendarProps) => {
             mode="single"
             selected={date}
             onSelect={(selectedDate) => selectedDate && handleDate(selectedDate)}
-            defaultMonth={new Date()}
+            defaultMonth={formatSwedishDateTime(new Date())}
             className="rounded-md border"
             disabled={(selectedDate) => {
                 // Get todays date and set it to midnight
-                const today = new Date();
+                const today = formatSwedishDateTime(new Date());
                 today.setHours(0, 0, 0, 0);
 
                 // Calculate the fixed 3 weeks ahead from today
-                const threeWeeksAhead = new Date(today);
+                const threeWeeksAhead = formatSwedishDateTime(new Date());
                 threeWeeksAhead.setDate(today.getDate() + 21);
 
                 // Set selected Date and set it to midnight
