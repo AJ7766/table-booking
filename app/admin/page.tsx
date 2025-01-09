@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { MoreVertical } from "lucide-react"
-import { formatDateTimeReadable, formatSwedishDateTime } from "@/utils/dateFormatter"
+import {  formatSwedishDateTime } from "@/utils/dateFormatter"
 import { Pagination } from "./components/ui/Pagination"
 import { getSearchParams } from "./services/tableServices"
 import { handleGetFilteredBookings } from "./services/bookingHandlers"
