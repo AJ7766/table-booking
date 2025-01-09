@@ -6,6 +6,7 @@ export async function middleware(req: NextRequest) {
     // Every URL that starts with "/admin" goes through a validation
     // If not authenitcated return a response 401 and a login-prompt
     // Checking authorization headers for values
+    
     if (pathname.startsWith("/admin")) {
         const isAuthenticatedResult = await isAuthenticated(req);
 
@@ -16,7 +17,9 @@ export async function middleware(req: NextRequest) {
             });
         }
     }
-
+    const headers = new Headers(req.headers);
+    headers.delete("authorization");
+    console.log(headers)
     return NextResponse.next();
 }
 
