@@ -50,7 +50,9 @@ try {
 export const postBookingController = async (data: BookingProps) => {
     try {
         // In reality form validations should be in the middleware, but since this is not an API we do it at the start
+        console.log("Retrieved Server Date", data.dateTime)
         const result = await formValidation(data);
+        console.log("Retrieved Server Date after filtered", result.data.dateTime)
 
         await postBooking({ data: result.data })
 
