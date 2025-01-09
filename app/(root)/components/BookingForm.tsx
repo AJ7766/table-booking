@@ -20,7 +20,7 @@ const times = [
 
 export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     const [date, setDate] = useState<Date | undefined>(new Date());
-    const [selectedTime, setSelectedTime] = useState<string | undefined>(times[0]);
+    const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined);
     const [updateBooking, setUpdateBooking] = useState(false);
     const [message, setMessage] = useState('');
 
@@ -30,7 +30,6 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
 
     useEffect(() => {
         if (date && selectedTime) {
-            console.log("Value Date:", formatDateTime(date, selectedTime))
             setValue("dateTime", formatDateTime(date, selectedTime));
         }
     }, [date, selectedTime, setValue]);
@@ -53,6 +52,7 @@ export const BookingForm = ({ bookedTimes }: { bookedTimes: Date[] }) => {
     const submitBooking = async (data: BookingProps) => {
         // Sending a server request to process submited data
         setMessage('')
+        console.log("Submited data", data.dateTime)
         const { message, success } = await handleSubmitBooking(data);
         setMessage(message);
         if (message === 'You already have a booking. Would you like to update your booking?') {
