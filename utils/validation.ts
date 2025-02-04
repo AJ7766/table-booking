@@ -12,5 +12,6 @@ export const formValidation = async (data: BookingProps) => {
 
 export const isValidPassword = async (password: string, hashedPassword: string) => {
     // Comparing the passwords
+    
     return (await hashPassword(password)) === hashedPassword
 }
